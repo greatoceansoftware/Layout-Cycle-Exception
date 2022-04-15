@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage">
+
+  <Grid Margin="20" RowDefinitions="Auto,Auto,*">
+    <Button Grid.Row="0" Text="Do Something" x:Name="ButtonDoSomething" Clicked="ButtonDoSomething_Clicked"/>
+    <Button Grid.Row="1" Text="Do Something Else" x:Name="ButtonDoSomethingElse" Clicked="ButtonDoSomethingElse_Clicked"/>
+    <ListView 
+      Grid.Row="2" 
+      Grid.Column="0"
+      x:Name="ListViewPhases"
+      ItemsSource="{Binding Path=Project.Phases, Mode=TwoWay}"
+      HorizontalOptions="FillAndExpand"
+      VerticalOptions="FillAndExpand"
+      IsGroupingEnabled="True"
+      >
+      <ListView.GroupHeaderTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <Grid BackgroundColor="White">
+              <Button
+                x:Name="ButtonPhase"
+                Text="{Binding Name, Mode=TwoWay}"
+                BackgroundColor="Salmon"
+                TextColor="Black"
+                HorizontalOptions="FillAndExpand"
+                FontSize="Medium"
+                FontAttributes="Bold" 
+                MinimumHeightRequest="60"
+                Margin="5,5,15,5"
+                IsVisible="{Binding IsMatch}"
+                Clicked="ButtonPhase_Clicked"
+             />
+            </Grid>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.GroupHeaderTemplate>
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <Grid
+              ColumnDefinitions="150, *"
+              BackgroundColor="White"
+              >
+              <Button 
+                Grid.Column="0" 
+                x:Name="ButtonGoal"
+                Background="LightSeaGreen"
+                Text="{Binding Path=Name, Mode=TwoWay}"
+                TextColor="Black"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                MinimumHeightRequest="60"
+                FontSize="Small"
+                FontAttributes="Bold" 
+                Margin="5"
+                IsVisible="{Binding IsMatch}"
+                Clicked="ButtonGoal_Clicked"
+              />
+              <ListView 
+                Grid.Column="1"
+                ItemsSource="{Binding Activities}" 
+                VerticalScrollBarVisibility="Never"
+                VerticalOptions="FillAndExpand"
+              >
+                <ListView.ItemTemplate>
+                  <DataTemplate>
+                    <ViewCell>
+                      <Grid
+                        BackgroundColor="White"
+                      >
+                        <Button 
+                          x:Name="ButtonActivity"
+                          Background="LightYellow"
+                          Text="{Binding Name, Mode=TwoWay}"
+                          TextColor="Black"
+                          HorizontalOptions="FillAndExpand"
+                          FontSize="Small"
+                          FontAttributes="Bold" 
+                          MinimumHeightRequest="100"
+                          Margin="5,5,15,5"
+                          IsVisible="{Binding IsMatch}"
+                          Clicked="ButtonActivity_Clicked"
+                        />
+                      </Grid>
+                    </ViewCell>
+                  </DataTemplate>
+                </ListView.ItemTemplate>
+              </ListView>
+            </Grid>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </Grid>
+</ContentPage>
+  
+  
+  
